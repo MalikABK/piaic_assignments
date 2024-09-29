@@ -1,34 +1,20 @@
-# Library Management System
+books:list = []
+users:list = []
 
-# Step 1: Setting up data structures for books and users
-books = []
-users = []
-
-# Sample Data
 books.append({"id": 1, "title": "To Kill a Mockingbird", "author": "Harper Lee", "genre": "Fiction", "status": "Available"})
 books.append({"id": 2, "title": "1984", "author": "George Orwell", "genre": "Dystopian", "status": "Checked Out"})
 books.append({"id": 3, "title": "The Great Gatsby", "author": "F. Scott Fitzgerald", "genre": "Classic", "status": "Available"})
 
 users.append({"id": 1, "name": "Alice", "borrowed_books": []})
 users.append({"id": 2, "name": "Bob", "borrowed_books": []})
+def add_books(id:int, title:str, author:str, genre:str,status:str) -> dict:
+    book: dict = {"id":id, "title":title, "author":author, "genre":genre, "status": status}
+    return  book
 
-# Step 2: Functions for managing books and users
 def view_all_books():
     print("\nAll Books:")
     for book in books:
-        print(f"{book['id']}. \"{book['title']}\" by {book['author']} ({book['status']})")
-
-def view_available_books():
-    print("\nAvailable Books:")
-    for book in books:
-        if book["status"] == "Available":
-            print(f"{book['id']}. \"{book['title']}\" by {book['author']}")
-
-def view_checked_out_books():
-    print("\nChecked Out Books:")
-    for book in books:
-        if book["status"] == "Checked Out":
-            print(f"{book['id']}. \"{book['title']}\" by {book['author']}")
+        print(f"{book['id']} {book['title']} by {book['author']} ({book['status']})")
 
 def search_books():
     search_type = input("Search by (1) Title, (2) Author, (3) Genre: ")
@@ -40,6 +26,21 @@ def search_books():
            (search_type == "2" and query in book["author"].lower()) or \
            (search_type == "3" and query in book["genre"].lower()):
             print(f"{book['id']}. \"{book['title']}\" by {book['author']} ({book['status']})")
+
+def add_user(id:int, user_name:str, borrowed_books:list) -> dict:
+    user: dict = {"id":id,"user_name":user_name, "borrowed_books":borrowed_books}
+    return user
+
+def view_users():
+    print("\nAll Users:")
+    for user in users:
+        print(f"User ID: {user['id']}, Name: {user['name']}, Borrowed Books: {', '.join(user['borrowed_books']) or 'None'}")
+
+def view_checked_out_books() -> None:
+    print("\nChecked Out Books:")
+    for book in books:
+        if book["status"] == "Checked Out":
+            print(f"{book['id']}. \"{book['title']}\" by {book['author']}")
 
 def borrow_book():
     user_id = int(input("Enter your User ID: "))
@@ -75,12 +76,7 @@ def return_book():
     else:
         print("Invalid User ID or Book ID.")
 
-def view_users():
-    print("\nAll Users:")
-    for user in users:
-        print(f"User ID: {user['id']}, Name: {user['name']}, Borrowed Books: {', '.join(user['borrowed_books']) or 'None'}")
 
-# Step 3: Creating the main menu and interaction loop
 def main_menu():
     while True:
         print("\nWelcome to the Community Library System!")
@@ -99,22 +95,18 @@ def main_menu():
         if choice == "1":
             view_all_books()
         elif choice == "2":
-            view_available_books()
-        elif choice == "3":
-            view_checked_out_books()
-        elif choice == "4":
             search_books()
-        elif choice == "5":
+        elif choice == "3":
             borrow_book()
-        elif choice == "6":
+        elif choice == "4":
             return_book()
-        elif choice == "7":
+        elif choice == "5":
             view_users()
-        elif choice == "8":
+        elif choice == "6":
             print("Exiting the system. Goodbye!")
             break
         else:
-            print("Invalid choice. Please enter a number between 1 and 8.")
+            print("Invalid choice. Please enter a number between 1 and 6.")
 
-# Run the main menu
 main_menu()
+
