@@ -7,18 +7,20 @@ books.append({"id": 3, "title": "The Great Gatsby", "author": "F. Scott Fitzgera
 
 users.append({"id": 1, "name": "Alice", "borrowed_books": []})
 users.append({"id": 2, "name": "Bob", "borrowed_books": []})
+
+
 def add_books(id:int, title:str, author:str, genre:str,status:str) -> dict:
     book: dict = {"id":id, "title":title, "author":author, "genre":genre, "status": status}
     return  book
 
-def view_all_books():
+def view_all_books() -> None:
     print("\nAll Books:")
     for book in books:
         print(f"{book['id']} {book['title']} by {book['author']} ({book['status']})")
 
-def search_books():
-    search_type = input("Search by (1) Title, (2) Author, (3) Genre: ")
-    query = input("Enter search term: ").lower()
+def search_books() -> None:
+    search_type:str = input("Search by (1) Title, (2) Author, (3) Genre: ")
+    query:str = input("Enter search term: ").lower()
 
     print("\nSearch Results:")
     for book in books:
@@ -31,7 +33,7 @@ def add_user(id:int, user_name:str, borrowed_books:list) -> dict:
     user: dict = {"id":id,"user_name":user_name, "borrowed_books":borrowed_books}
     return user
 
-def view_users():
+def view_users() -> None:
     print("\nAll Users:")
     for user in users:
         print(f"User ID: {user['id']}, Name: {user['name']}, Borrowed Books: {', '.join(user['borrowed_books']) or 'None'}")
@@ -42,12 +44,12 @@ def view_checked_out_books() -> None:
         if book["status"] == "Checked Out":
             print(f"{book['id']}. \"{book['title']}\" by {book['author']}")
 
-def borrow_book():
-    user_id = int(input("Enter your User ID: "))
-    book_id = int(input("Enter the Book ID to borrow: "))
+def borrow_book() -> None:
+    user_id:int = int(input("Enter your User ID: "))
+    book_id:int = int(input("Enter the Book ID to borrow: "))
 
-    user = next((user for user in users if user["id"] == user_id), None)
-    book = next((book for book in books if book["id"] == book_id), None)
+    user:list = next((user for user in users if user["id"] == user_id), None)
+    book:list = next((book for book in books if book["id"] == book_id), None)
 
     if user and book:
         if book["status"] == "Available":
@@ -59,12 +61,12 @@ def borrow_book():
     else:
         print("Invalid User ID or Book ID.")
 
-def return_book():
-    user_id = int(input("Enter your User ID: "))
-    book_id = int(input("Enter the Book ID to return: "))
+def return_book() -> None:
+    user_id:int = int(input("Enter your User ID: "))
+    book_id:int = int(input("Enter the Book ID to return: "))
 
-    user = next((user for user in users if user["id"] == user_id), None)
-    book = next((book for book in books if book["id"] == book_id), None)
+    user:list = next((user for user in users if user["id"] == user_id), None)
+    book:list = next((book for book in books if book["id"] == book_id), None)
 
     if user and book:
         if book["title"] in user["borrowed_books"]:
@@ -77,7 +79,7 @@ def return_book():
         print("Invalid User ID or Book ID.")
 
 
-def main_menu():
+def main_menu() -> None:
     while True:
         print("\nWelcome to the Community Library System!")
         print("----------------------------------------")
@@ -95,17 +97,17 @@ def main_menu():
         if choice == "1":
             view_all_books()
         elif choice == "2":
-            id = len(books) + 1
-            title = input("Enter the title of the book: ")
-            author = input("Enter the author's name: ")
-            genre = input("Enter the genre of the book: ")
-            status = "Available"
-            books.append(add_books(id,title, author, genre, status))
+            id:int = len(books) + 1
+            title:str = input("Enter the title of the book: ")
+            author:str = input("Enter the author's name: ")
+            genre:str = input("Enter the genre of the book: ")
+            status:str = "Available"
+            books.append(add_books(id=id,title=title, author=author, genre=genre, status=status))
             
         elif choice == "3":
-            id = len(users) + 1
-            user_name = input("Enter the name of the user: ")
-            borrowed_books = []
+            id:int = len(users) + 1
+            user_name:int = input("Enter the name of the user: ")
+            borrowed_books:int = []
             users.append(add_user(id, user_name, borrowed_books))
             
         elif choice == "4":
