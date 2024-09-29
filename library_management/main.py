@@ -82,8 +82,8 @@ def main_menu():
         print("\nWelcome to the Community Library System!")
         print("----------------------------------------")
         print("1. View all books")
-        print("2. View available books")
-        print("3. View checked-out books")
+        print("2. to add a new book")
+        print("3. to add a new user")
         print("4. Search for a book")
         print("5. Borrow a book")
         print("6. Return a book")
@@ -95,14 +95,30 @@ def main_menu():
         if choice == "1":
             view_all_books()
         elif choice == "2":
-            search_books()
+            id = len(books) + 1
+            title = input("Enter the title of the book: ")
+            author = input("Enter the author's name: ")
+            genre = input("Enter the genre of the book: ")
+            status = "Available"
+            books.append(add_books(id,title, author, genre, status))
+            
         elif choice == "3":
-            borrow_book()
+            id = len(users) + 1
+            user_name = input("Enter the name of the user: ")
+            borrowed_books = []
+            users.append(add_user(id, user_name, borrowed_books))
+            
         elif choice == "4":
-            return_book()
+            search_books()
+            
         elif choice == "5":
-            view_users()
+            borrow_book()
+            
         elif choice == "6":
+            return_book()
+        elif choice == "7":
+            view_users()
+        elif choice == "8":
             print("Exiting the system. Goodbye!")
             break
         else:
